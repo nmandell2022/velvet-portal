@@ -21,17 +21,25 @@ html, body {
   font-family: var(--sans);
 }
 
-/* Background layers */
+/* =========================
+   Background layers
+   ========================= */
 .bg-gradient,
 .bg-velvet,
-.bg-grain {
+.bg-aurora,
+.bg-grain,
+.bg-vignette {
   position: fixed; inset: 0; z-index: -1; pointer-events: none;
 }
+
+/* deep night */
 .bg-gradient {
   background:
     radial-gradient(120% 140% at 70% -10%, #1e141a 0%, #0d0a0f 55%, #060509 100%),
     linear-gradient(180deg, #100b10 0%, #0b0a0d 100%);
 }
+
+/* static velvet bloom */
 .bg-velvet {
   background:
     radial-gradient(40% 60% at 30% 10%, rgba(74,30,42,.28) 0%, transparent 60%),
@@ -40,6 +48,21 @@ html, body {
   filter: blur(16px);
   opacity: .60;
 }
+
+/* drifting aurora – sensual motion */
+.bg-aurora {
+  inset: -10% -10% -10% -10%;
+  background:
+    radial-gradient(35% 40% at 20% 25%, rgba(74,30,42,.45), transparent 60%),
+    radial-gradient(35% 45% at 82% 72%, rgba(43,16,23,.55), transparent 60%),
+    conic-gradient(from 210deg at 50% 40%, rgba(212,175,55,.08), transparent 70%);
+  filter: blur(24px) saturate(1.06);
+  animation: drift 28s ease-in-out infinite;
+  mix-blend-mode: screen;
+  opacity: .8;
+}
+
+/* soft film grain */
 .bg-grain {
   opacity: .18;
   background-image:
@@ -50,7 +73,27 @@ html, body {
   mix-blend-mode: overlay;
 }
 
-/* Layout */
+/* vignette for mystery */
+.bg-vignette {
+  background:
+    radial-gradient(60% 60% at 50% 40%, transparent 40%, rgba(0,0,0,.55) 100%);
+}
+
+/* motion safety */
+@media (prefers-reduced-motion: reduce) {
+  .bg-aurora { animation: none; }
+}
+
+/* aurora drift keyframes */
+@keyframes drift {
+  0%   { transform: translate3d(0,0,0) rotate(0deg);   opacity:.75; }
+  50%  { transform: translate3d(2%, -1%, 0) rotate(8deg); opacity:.95; }
+  100% { transform: translate3d(0,0,0) rotate(0deg);   opacity:.75; }
+}
+
+/* =========================
+   Layout
+   ========================= */
 .shell { min-height: 100dvh; padding: clamp(20px, 3vw, 40px); display: grid; place-items: center; }
 .card {
   width: 100%; max-width: 920px;
@@ -62,7 +105,9 @@ html, body {
   backdrop-filter: blur(10px);
 }
 
-/* Type */
+/* =========================
+   Type
+   ========================= */
 .h1 {
   margin: 0 0 8px;
   font-family: var(--display);
@@ -76,7 +121,9 @@ html, body {
 .sub { margin: 4px 0 16px; color: var(--text-2); font-size: clamp(14px, 1.25vw, 16px); }
 .tagline { font-family: var(--display); font-style: italic; color: #f0e9cc; opacity: .92; }
 
-/* Buttons */
+/* =========================
+   Buttons
+   ========================= */
 .btn {
   display: inline-block; text-decoration: none; color: #f8f8f8; font-weight: 700; letter-spacing: .25px;
   padding: 11px 16px; border-radius: 12px;
@@ -97,7 +144,9 @@ html, body {
 }
 .btn-ghost:hover { transform: translateY(-1px); filter: brightness(1.06); }
 
-/* Chips */
+/* =========================
+   Chips
+   ========================= */
 .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
 .chip {
   padding: 5px 9px; border-radius: 999px;
@@ -105,7 +154,9 @@ html, body {
   background: rgba(20,18,22,.42); font-size: 11px;
 }
 
-/* Hero */
+/* =========================
+   Hero
+   ========================= */
 .hero-grid {
   display: grid; grid-template-columns: minmax(180px, 260px) 1fr;
   gap: clamp(18px, 3vw, 30px); align-items: center;
@@ -118,10 +169,10 @@ html, body {
   display: grid; place-items: center;
   box-shadow: inset 0 1px 0 rgba(255,255,255,.03), 0 10px 36px rgba(0,0,0,.44);
 }
-.cta-row { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
-.hr { height: 1px; background: linear-gradient(90deg, transparent, rgba(212,175,55,.32), transparent); border: none; margin: 14px 0; }
 
-/* Forms (for /login later) */
+/* =========================
+   Forms (for /login etc.)
+   ========================= */
 .form-grid { display: grid; gap: 14px; }
 .label { font-size: 13px; color: var(--text-2); margin-bottom: 4px; display:block; }
 .input {
