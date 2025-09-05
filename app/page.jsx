@@ -1,9 +1,46 @@
 export default function Home() {
+  const Crest = () => (
+    <svg
+      viewBox="0 0 220 220"
+      width="170"
+      height="170"
+      role="img"
+      aria-label="Velvet Nights crest"
+    >
+      <defs>
+        <linearGradient id="g" x1="0" x2="1">
+          <stop offset="0%" stopColor="#d4af37" />
+          <stop offset="100%" stopColor="#f5e7b6" />
+        </linearGradient>
+        <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="0.6" />
+        </filter>
+      </defs>
+
+      <circle cx="110" cy="110" r="92" fill="none" stroke="url(#g)" strokeWidth="1.6" />
+      <circle cx="110" cy="110" r="70" fill="none" stroke="rgba(212,175,55,.35)" strokeWidth="1" />
+
+      {/* VN monogram */}
+      <g transform="translate(60,58)">
+        <path
+          d="M10 95 L10 10 L22 10 L54 70 L86 10 L98 10 L98 95 L88 95 L88 33 L58 90 L50 90 L20 33 L20 95 Z"
+          fill="none"
+          stroke="url(#g)"
+          strokeWidth="2.6"
+          filter="url(#soft)"
+        />
+      </g>
+
+      {/* tiny sparkle */}
+      <circle cx="162" cy="62" r="1.6" fill="url(#g)" />
+    </svg>
+  );
+
   return (
     <div className="card">
       <div className="hero-grid">
         <div className="crest-wrap">
-          <img src="/velvet-crest.svg" alt="Velvet Nights crest" width="170" height="170" />
+          <Crest />
         </div>
 
         <div>
